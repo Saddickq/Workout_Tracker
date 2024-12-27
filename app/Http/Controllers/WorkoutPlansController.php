@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WorkoutPlans;
+use App\Models\WorkoutPlan;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -20,7 +20,7 @@ class WorkoutPlansController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $plans = WorkoutPlans::all();
+        $plans = WorkoutPlan::all();
         return response()->json($plans, 200);
     }
 
@@ -45,7 +45,7 @@ class WorkoutPlansController extends Controller implements HasMiddleware
     public function show(string $id)
     {
         try {
-            $workout_plan = WorkoutPlans::findOrFail($id);
+            $workout_plan = WorkoutPlan::findOrFail($id);
             return response()->json($workout_plan, 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'No workout Plan found'], 404);
@@ -58,7 +58,7 @@ class WorkoutPlansController extends Controller implements HasMiddleware
     public function update(Request $request, string $id)
     {
         try {
-            $workout_plan = WorkoutPlans::findOrFail($id);
+            $workout_plan = WorkoutPlan::findOrFail($id);
             $field = $request->validate([
                 'name' => 'required|string|max:128',
                 'description' => "required|max:255",
@@ -76,7 +76,7 @@ class WorkoutPlansController extends Controller implements HasMiddleware
     public function destroy(string $id)
     {
         try {
-            $workout_plan = WorkoutPlans::findOrFail($id);
+            $workout_plan = WorkoutPlan::findOrFail($id);
             $workout_plan->delete();
             return response()->json(['message' => 'workout Plan deleted successfully'], 200);
         } catch (\Throwable $th) {

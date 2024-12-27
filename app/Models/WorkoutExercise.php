@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WorkoutExercise extends Model
 {
     protected $fillable = [
+        'exercise_id',
         'sets',
         'repetitions',
         'distance',
@@ -15,7 +16,7 @@ class WorkoutExercise extends Model
 
     public function workout_plan()
     {
-        return $this->belongsTo(WorkoutPlans::class);
+        return $this->belongsTo(WorkoutPlan::class);
     }
 
     public function exercise()
